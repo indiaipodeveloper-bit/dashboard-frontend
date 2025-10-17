@@ -14,7 +14,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.userinfo);
   const [name, setname] = useState("");
-  const [password, setpassword] = useState("")
+  const [password, setpassword] = useState("");
   const [image, setimage] = useState(null);
   const [hovered, sethovered] = useState(false);
   const fileInputRef = useRef(null);
@@ -26,29 +26,26 @@ const Profile = () => {
     }
   }, [user]);
 
-  const validateProfile = () => {
-    if (!name) {
-      toast.error("Name is required");
-      return false;
-    }
-    return true;
-  };
   const saveChanges = async () => {
-    if (validateProfile()) {
-      try {
-        const res = await axios.post(
-          `${BackendUrl}/admin/update-profile`,
-          { name,password },
-          { withCredentials: true }
+    try {
+      const res = await axios.post(
+        `${BackendUrl}/admin/update-profile`,
+        { name, password },
+        { withCredentials: true }
+      );
+      if (res.status === 200) {
+        dispatch(
+          setUserInfo({
+            ...user,
+            name: res.data.user.name,
+            image: res.data.user.image,
+          })
         );
-        if (res.status === 200) {
-          dispatch(setUserInfo({ ...user, name: res.data.user.name ,image:res.data.user.image}));
-          toast.success("Profile Updated");
-          navigate("/");
-        }
-      } catch (error) {
-        console.log(error);
+        toast.success("Profile Updated");
+        navigate("/");
       }
+    } catch (error) {
+      console.log(error);
     }
   };
 
