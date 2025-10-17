@@ -171,20 +171,21 @@ export function UserTable() {
               <AlertDialogTrigger>
                 <MdDelete className="inline mr-1 text-2xl text-red-600" />
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent className={"bg-[#1a1d21]"}>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
+                  <AlertDialogTitle className={"text-white"}>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription className={"text-gray-300"}>
                     This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
+                    the account from the servers.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogCancel className={"cursor-pointer"}>Cancel</AlertDialogCancel>
                   <AlertDialogAction
                     onClick={() => {
                       handleDeleteUserByAdmin(user);
                     }}
+                    className={"cursor-pointer"}
                   >
                     Continue
                   </AlertDialogAction>

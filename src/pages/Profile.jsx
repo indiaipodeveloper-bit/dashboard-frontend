@@ -14,6 +14,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.userinfo);
   const [name, setname] = useState("");
+  const [password, setpassword] = useState("")
   const [image, setimage] = useState(null);
   const [hovered, sethovered] = useState(false);
   const fileInputRef = useRef(null);
@@ -37,7 +38,7 @@ const Profile = () => {
       try {
         const res = await axios.post(
           `${BackendUrl}/admin/update-profile`,
-          { name },
+          { name,password },
           { withCredentials: true }
         );
         if (res.status === 200) {
@@ -172,12 +173,23 @@ const Profile = () => {
                 }}
               />
             </div>
+            <div className="w-full">
+              <Input
+                placeholder="Enter New Password"
+                type="text"
+                value={password}
+                className="rounded-lg p-6 bg-[#2c2e3b] border-none"
+                onChange={(e) => {
+                  setpassword(e.target.value);
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
       <div className="w-1/2">
         <Button
-          className="h-16 cursor-pointer rounded-full w-full bg-purple-700 hover:bg-purple-900 transition-all duration-300"
+          className="h-16 cursor-pointer rounded-full w-full bg-purple-700 hover:bg-purple-900 text-white font-bold transition-all duration-300"
           onClick={() => {
             saveChanges();
           }}
