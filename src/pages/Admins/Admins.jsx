@@ -33,9 +33,7 @@ const Admins = () => {
               />
             </div>
 
-            {user.adminRole === "SuperAdmin" && (
-              <AddNewAdmin admins={admins} setadmins={setadmins} />
-            )}
+            <AddNewAdmin admins={admins} setadmins={setadmins} />
           </div>
         </div>
 
@@ -89,13 +87,14 @@ transition-all duration-500 ease-out p-5"
                   </div>
 
                   {/* Buttons Section */}
-                  {user.adminRole === "SuperAdmin" && (
-                    <div className="mt-3 w-full flex gap-3">
-                      <EditAdmin member={member} setadmins={setadmins} />
+                  {user._id !== member._id &&
+                    user.adminRole === "SuperAdmin" && (
+                      <div className="mt-3 w-full flex gap-3">
+                        <EditAdmin member={member} setadmins={setadmins} />
 
-                      <DeleteAdmin member={member} setadmins={setadmins} />
-                    </div>
-                  )}
+                        <DeleteAdmin member={member} setadmins={setadmins} />
+                      </div>
+                    )}
                 </div>
               ))}
             </div>
