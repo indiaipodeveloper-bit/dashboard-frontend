@@ -33,7 +33,9 @@ const Admins = () => {
               />
             </div>
 
-            <AddNewAdmin admins={admins} setadmins={setadmins} />
+            {user.adminRole === "SuperAdmin" && (
+              <AddNewAdmin admins={admins} setadmins={setadmins} />
+            )}
           </div>
         </div>
 
