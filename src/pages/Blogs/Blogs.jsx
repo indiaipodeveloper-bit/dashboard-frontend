@@ -13,7 +13,6 @@ const Blogs = () => {
   const filteredBlogs = blogs.filter((blog) => {
     return blog.title.toLowerCase().includes(searchBlog.toLowerCase());
   });
-  console.log(filteredBlogs)
   return (
     <div className="">
       <div className="bg-[#222529] shadow-sm px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

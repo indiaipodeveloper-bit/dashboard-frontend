@@ -7,8 +7,15 @@ import { Link } from "react-router-dom";
 import Deleteblog from "./components/Deleteblog";
 import { BackendUrl } from "../../../../assets/constant";
 
-const AllBlogs = ({ filteredBlogs,setblogs }) => {
+const AllBlogs = ({ filteredBlogs, setblogs }) => {
 
+  
+  const truncateHTML = (html, limit = 150) => {
+    const temp = document.createElement("div");
+    temp.innerHTML = html;
+    const text = temp.textContent || temp.innerText || "";
+    return text.length > limit ? text.slice(0, limit) + "..." : text;
+  };
   return (
     <>
       {filteredBlogs.length < 1 ? (
@@ -67,6 +74,13 @@ const AllBlogs = ({ filteredBlogs,setblogs }) => {
 
                       <Deleteblog setblogs={setblogs} blog={blog} />
                     </div>
+
+                    <div
+                    className="text-white text-sm my-2.5"
+                      dangerouslySetInnerHTML={{
+                        __html: truncateHTML(blog.description, 150),
+                      }}
+                    />
                   </div>
 
                   <div className="flex justify-between  items-center text-xs md:text-sm text-white/60 mt-2">
