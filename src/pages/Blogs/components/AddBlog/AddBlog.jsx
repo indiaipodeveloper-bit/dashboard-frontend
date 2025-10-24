@@ -34,6 +34,30 @@ const AddBlog = ({ setblogs, setisAddBlog, placeholder }) => {
     [placeholder]
   );
 
+  const valiDateBlogForm = () => {
+    if (!title) {
+      toast.error("Title is required");
+      return false;
+    }
+    if (!slug) {
+      toast.error("Slug is Required");
+      return false;
+    }
+    if (!subDescription) {
+      toast.error("SubDescription is Required");
+      return false;
+    }
+    if (!description) {
+      toast.error("Description is Required");
+      return false;
+    }
+    if (!image) {
+      toast.error("Image is Required");
+      return false;
+    }
+    return true;
+  };
+
   const handleAddBlog = async () => {
     try {
       const formData = new FormData();
@@ -148,7 +172,11 @@ const AddBlog = ({ setblogs, setisAddBlog, placeholder }) => {
         {/* Button */}
         <div className="pt-4">
           <button
-            onClick={handleAddBlog}
+            onClick={() => {
+              if (valiDateBlogForm()) {
+                handleAddBlog();
+              }
+            }}
             type="button"
             className="w-full bg-indigo-600 text-white py-3 cursor-pointer rounded-lg font-medium hover:bg-indigo-700 hover:scale-[1.02] active:scale-95 transition-all duration-300 shadow-lg shadow-indigo-600/20"
           >
