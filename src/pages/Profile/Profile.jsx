@@ -1,14 +1,25 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
 import { FaPlus, FaTrash } from "react-icons/fa";
-import { Avatar, AvatarImage } from "../components/ui/avatar";
+import { Avatar, AvatarImage } from "../../components/ui/avatar";
 import { toast } from "sonner";
 import axios from "axios";
-import { BackendUrl } from "../assets/constant";
-import { setUserInfo } from "../redux/slices/Authslice";
+import { BackendUrl } from "../../assets/constant";
+import { setUserInfo } from "../../redux/slices/Authslice";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../../components/ui/alert-dialog";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -111,7 +122,6 @@ const Profile = () => {
             <Avatar className="h-32 w-32 md:w-48  md:h-48 rounded-full border-[1px] overflow-hidden">
               {image ? (
                 <AvatarImage
-                  // src={`${BackendUrl}/${user.image}`}
                   src={image}
                   alt="profile imgage"
                   className="object-cover w-full h-full bg-cover bg-black"
@@ -128,11 +138,35 @@ const Profile = () => {
               <div
                 className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full cursor-pointer ring-fuchsia-50"
                 onClick={(e) => {
-                  image ? handleDeleteImage() : handleFileInputClick();
+                  !image && handleFileInputClick();
                 }}
               >
                 {image ? (
-                  <FaTrash className="text-white text-3xl cursor-pointer" />
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="outline" className={"w-full h-full"}>
+                        <FaTrash className="text-white text-3xl m-auto cursor-pointer" />
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Are you absolutely sure to Delete the Image ?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will permanently
+                          delete your image from the
+                          servers.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel className={"cursor-pointer"}>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleDeleteImage} className={"bg-red-500  hover:bg-red-400 cursor-pointer"}>
+                          Delete
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 ) : (
                   <FaPlus className="text-white text-3xl cursor-pointer" />
                 )}

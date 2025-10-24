@@ -1,5 +1,11 @@
-.bg-img-div{
-    background-image: url("./assets/Untitled.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+.bg-img-div {
+  background-image: url("./assets/Untitled.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+* {
+    font-family: "Roboto Mono", monospace;
 }
