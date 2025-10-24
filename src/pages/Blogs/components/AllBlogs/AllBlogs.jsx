@@ -29,11 +29,11 @@ const AllBlogs = ({ blogs }) => {
           hover:shadow-purple-500/30 hover:-translate-y-1 transition-all duration-500 p-4 md:p-5"
               >
                 {/* Blog Image */}
-                <div className="w-full h-56 md:w-1/3 bg-red-600 rounded-xl overflow-hidden shadow-md">
+                <div className="w-full h-56 md:w-1/3 rounded-xl overflow-hidden shadow-md">
                   {blog.image ? (
                     <img
                       src={`${BackendUrl}/${blog.image}`}
-                      alt={blog.image}
+                      alt={blog.title}
                       className="w-full h-full rounded-xl"
                     />
                   ) : (
