@@ -6,7 +6,7 @@ import axios from "axios";
 import { BackendUrl } from "../../../../assets/constant";
 import { toast } from "sonner";
 
-const AddBlog = ({setblogs, setisAddBlog, placeholder }) => {
+const AddBlog = ({ setblogs, setisAddBlog, placeholder }) => {
   const editor = useRef(null);
   const [title, settitle] = useState("");
   const [slug, setslug] = useState("");
@@ -26,6 +26,10 @@ const AddBlog = ({setblogs, setisAddBlog, placeholder }) => {
         wordBreak: "break-word",
         maxWidth: "100%",
       },
+      askBeforePasteHTML: false,
+      askBeforePasteFromWord: false,
+      defaultActionOnPaste: "insert_as_html",
+      pasteHTMLActionList: ["insert_as_html"],
     }),
     [placeholder]
   );
@@ -33,21 +37,21 @@ const AddBlog = ({setblogs, setisAddBlog, placeholder }) => {
   const handleAddBlog = async () => {
     try {
       const formData = new FormData();
-    formData.append("title", title);
-    formData.append("slug", slug);
-    formData.append("subDescription", subDescription);
-    formData.append("description", description);
-    formData.append("blog-image", image);
-    const res = await axios.post(`${BackendUrl}/admin/add-blog`, formData, {
-      withCredentials: true,
-    });
-  if(res.status == 200){
-    toast.success("Blog Added Successfully")
-    setblogs((prev)=>[...prev,res.data.blog])
-    setisAddBlog(false)
-  }    
+      formData.append("title", title);
+      formData.append("slug", slug);
+      formData.append("subDescription", subDescription);
+      formData.append("description", description);
+      formData.append("blog-image", image);
+      const res = await axios.post(`${BackendUrl}/admin/add-blog`, formData, {
+        withCredentials: true,
+      });
+      if (res.status == 200) {
+        toast.success("Blog Added Successfully");
+        setblogs((prev) => [...prev, res.data.blog]);
+        setisAddBlog(false);
+      }
     } catch (error) {
-      toast.error(error.response.data)
+      toast.error(error.response.data);
     }
   };
   return (
