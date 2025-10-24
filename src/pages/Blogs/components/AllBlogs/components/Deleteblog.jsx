@@ -17,14 +17,14 @@ import { BackendUrl } from "../../../../../assets/constant";
 import { MdDelete } from "react-icons/md";
 import { toast } from "sonner";
 
-const Deleteblog = ({ setallBlogs,blog }) => {
+const Deleteblog = ({ setblogs,blog }) => {
   const handleDeleteBlog = async () => {
     try {
       const res = await axios.post(`${BackendUrl}/admin/delete-blog`, blog, {
         withCredentials: true,
       });
       if (res.status == 200) {
-        setallBlogs((prev)=> prev.filter((e)=> e._id !== blog._id))
+        setblogs((prev)=> prev.filter((e)=> e._id !== blog._id))
         toast.success(res.data);
       }
     } catch (error) {

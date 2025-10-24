@@ -86,6 +86,9 @@ transition-all duration-500 ease-out p-5"
                     <p className="text-sm font-medium text-white/70 break-all">
                       {member.email}
                     </p>
+                    {user.email == member.email && (
+                      <p className="font-bold text-white mt-2.5">(You)</p>
+                    )}
                   </div>
 
                   {/* Buttons Section */}

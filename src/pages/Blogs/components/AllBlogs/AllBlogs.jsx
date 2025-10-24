@@ -7,19 +7,17 @@ import { Link } from "react-router-dom";
 import Deleteblog from "./components/Deleteblog";
 import { BackendUrl } from "../../../../assets/constant";
 
-const AllBlogs = ({ blogs }) => {
-  const [selectedBlog, setselectedBlog] = useState("");
-  const [allBlogs, setallBlogs] = useState(blogs);
+const AllBlogs = ({ filteredBlogs,setblogs }) => {
 
   return (
     <>
-      {blogs.length < 1 ? (
+      {filteredBlogs.length < 1 ? (
         <div className="text-3xl text-white font-bold text-center relative top-44">
           No Blogs!
         </div>
       ) : (
-        <div className="flex gap-x-10 gap-y-10 mt-5 mx-auto p-5 items-start justify-center flex-wrap">
-          {allBlogs.map((blog) => {
+        <div className="flex gap-x-10 gap-y-10 mt-5 overflow-y-auto mx-auto p-5 items-start justify-center flex-wrap">
+          {filteredBlogs.map((blog) => {
             return (
               <div
                 key={blog._id}
@@ -67,7 +65,7 @@ const AllBlogs = ({ blogs }) => {
                         <MdEdit className="text-xl cursor-pointer  " />
                       </Button>
 
-                      <Deleteblog setallBlogs={setallBlogs} blog={blog} />
+                      <Deleteblog setblogs={setblogs} blog={blog} />
                     </div>
                   </div>
 
