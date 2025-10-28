@@ -19,11 +19,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "./redux/slices/Authslice";
 import Profile from "./pages/Profile/Profile";
 import BlogOverview from "./pages/Blogs/components/blogoverview/BlogOverview";
+import AddBlog from "./pages/Blogs/components/AddBlog/AddBlog";
+import EditBlog from "./pages/Blogs/components/EditBlog/EditBlog";
+import NewsOverview from "./pages/News/components/NewsOverview/NewsOverview";
+import EditNews from "./pages/News/components/EditNews/EditNews";
 
 function App() {
   const trigerRef = useRef(null);
   const location = useLocation();
-  const condition = location.pathname !== "/login" && location.pathname !== "/profile"
+  const condition =
+    location.pathname !== "/login" && location.pathname !== "/profile";
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.auth.userinfo);
   const getuserDetails = async () => {
@@ -94,6 +99,26 @@ function App() {
                 </ProtectPrivateRoute>
               }
             />
+
+            <Route
+              path="/news/:slug"
+              element={
+                <ProtectPrivateRoute>
+                  <NewsOverview />
+                </ProtectPrivateRoute>
+              }
+            />
+
+            <Route
+              path="/news/edit-news/:slug"
+              element={
+                <ProtectPrivateRoute>
+                  <EditNews />
+                </ProtectPrivateRoute>
+              }
+              
+            />
+
             <Route
               path="/meetings"
               element={
@@ -107,6 +132,14 @@ function App() {
               element={
                 <ProtectPrivateRoute>
                   <BlogOverview />
+                </ProtectPrivateRoute>
+              }
+            />
+            <Route
+              path="/blogs/edit-blog/:slug"
+              element={
+                <ProtectPrivateRoute>
+                  <EditBlog />
                 </ProtectPrivateRoute>
               }
             />
@@ -146,7 +179,7 @@ function App() {
               path="/profile"
               element={
                 <ProtectPrivateRoute>
-                  <Profile/>
+                  <Profile />
                 </ProtectPrivateRoute>
               }
             />
