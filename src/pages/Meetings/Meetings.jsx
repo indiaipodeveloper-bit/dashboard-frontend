@@ -9,7 +9,6 @@ import { RiMoneyRupeeCircleLine } from "react-icons/ri";
 const Meetings = () => {
   const meetings = useSelector((state) => state.meetings.allMeetings);
   const [allMeetings, setallMeetings] = useState(meetings);
-  console.log(meetings);
   const NoToMonths = {
     1: "January",
     2: "February",
@@ -24,7 +23,6 @@ const Meetings = () => {
     11: "November",
     12: "December",
   };
-console.log(NoToMonths[1])
   return (
     <div>
       <div className="bg-[#222529] shadow-sm px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
